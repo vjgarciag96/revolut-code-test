@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.load.resource.bitmap.FitCenter
+import com.google.android.material.textfield.TextInputEditText
 import com.vjgarcia.rates.R
 
 class RateRowViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -20,5 +21,6 @@ class RateRowViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 .transform(FitCenter(), CircleCrop())
                 .into(this)
         }
+        itemView.findViewById<TextInputEditText>(R.id.currencyValueTextField).setText(rateRow.currencyValue.toString())
     }
 }

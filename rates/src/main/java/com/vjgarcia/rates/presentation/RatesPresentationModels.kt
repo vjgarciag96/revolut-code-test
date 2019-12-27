@@ -10,5 +10,6 @@ data class RateRow(
     val id: String,
     @DrawableRes val currencyFlagResId: Int?,
     val title: String,
-    val subtitle: String
+    val subtitle: String,
+    val currencyValue: Double
 )

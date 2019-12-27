@@ -23,16 +23,14 @@
 
     <TextView
             android:id="@+id/currencyTitle"
+            style="@style/SecondaryTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/currencyValueTextField"
             app:layout_constraintStart_toEndOf="@+id/currencyIcon"
             app:layout_constraintTop_toTopOf="@+id/currencyIcon"
-            style="@style/SecondaryTitle"
             tools:text="USD" />
 
     <TextView
@@ -45,8 +43,21 @@
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
             app:layout_constraintBottom_toBottomOf="@+id/currencyIcon"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/currencyValueTextField"
             app:layout_constraintStart_toEndOf="@+id/currencyIcon"
             tools:text="US Dollar" />
+
+    <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/currencyValueTextField"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:inputType="numberSigned"
+            android:textAppearance="@style/Amount"
+            android:backgroundTint="#191C1F"
+            app:layout_constraintBottom_toBottomOf="@+id/currencyIcon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/currencyIcon"
+            tools:text="1000" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

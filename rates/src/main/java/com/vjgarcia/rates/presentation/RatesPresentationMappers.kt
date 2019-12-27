@@ -11,7 +11,8 @@ fun LatestRates.toRatesState(): RatesState =
                 id = entry.key,
                 title = entry.key,
                 subtitle = Currency.getInstance(entry.key).displayName,
-                currencyFlagResId = CurrencyFlags.byISOCode[entry.key]
+                currencyFlagResId = CurrencyFlags.byISOCode[entry.key],
+                currencyValue = entry.value
             )
         }
     )

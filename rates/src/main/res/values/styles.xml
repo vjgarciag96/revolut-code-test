@@ -15,4 +15,10 @@
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">#8B959E</item>
     </style>
+
+    <style name="Amount">
+        <item name="android:textSize">20sp</item>
+        <item name="android:letterSpacing">0.02</item>
+        <item name="android:textColor">#191C1F</item>
+    </style>
 </resources>
