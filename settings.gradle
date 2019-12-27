@@ -1,2 +1,2 @@
-include ':app'
+include ':app', ':rates'
 rootProject.name='revolut-code-test'
