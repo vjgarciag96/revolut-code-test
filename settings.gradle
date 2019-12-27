@@ -1,2 +1,2 @@
-include ':app', ':rates', ':commons'
+include ':app', ':rates', ':commons', ':currencyflags'
 rootProject.name='revolut-code-test'

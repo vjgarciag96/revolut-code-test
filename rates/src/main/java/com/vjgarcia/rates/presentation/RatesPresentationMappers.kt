@@ -1,5 +1,6 @@
 package com.vjgarcia.rates.presentation
 
+import com.vjgarcia.currencyflags.CurrencyFlags
 import com.vjgarcia.rates.domain.LatestRates
 
 fun LatestRates.toRatesState(): RatesState =
@@ -8,7 +9,8 @@ fun LatestRates.toRatesState(): RatesState =
             RateRow(
                 id = entry.key,
                 currencyCode = entry.key,
-                currencyValue = entry.value
+                currencyValue = entry.value,
+                currencyFlagResId = CurrencyFlags.byISOCode[entry.key]
             )
         }
     )
