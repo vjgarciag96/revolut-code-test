@@ -32,12 +32,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/currencyIcon"
             app:layout_constraintTop_toTopOf="@+id/currencyIcon"
-            style="@style/title"
+            style="@style/SecondaryTitle"
             tools:text="USD" />
 
     <TextView
             android:id="@+id/currencySubtitle"
-            style="@style/description"
+            style="@style/Subtitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
