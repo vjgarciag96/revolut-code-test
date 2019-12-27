@@ -12,8 +12,8 @@ import com.vjgarcia.rates.R
 class RateRowViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(rateRow: RateRow) {
-        itemView.findViewById<TextView>(R.id.currencyTitle).text = rateRow.currencyCode
-        itemView.findViewById<TextView>(R.id.currencySubtitle).text = rateRow.currencyValue.toString()
+        itemView.findViewById<TextView>(R.id.currencyTitle).text = rateRow.title
+        itemView.findViewById<TextView>(R.id.currencySubtitle).text = rateRow.subtitle
         itemView.findViewById<ImageView>(R.id.currencyIcon).run {
             Glide.with(itemView.context)
                 .load(rateRow.currencyFlagResId)

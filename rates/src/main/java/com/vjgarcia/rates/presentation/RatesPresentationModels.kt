@@ -9,6 +9,6 @@ data class RatesState(
 data class RateRow(
     val id: String,
     @DrawableRes val currencyFlagResId: Int?,
-    val currencyCode: String,
-    val currencyValue: Double
+    val title: String,
+    val subtitle: String
 )
