@@ -1,4 +1,4 @@
-package com.vjgarcia.rates.data
+package com.vjgarcia.rates.data.network
 
 import com.squareup.moshi.Json
 
@@ -8,4 +8,4 @@ data class LatestRatesDTO(
     @Json(name = "rates") val rates: Map<String, Double>
 )
 
-object LatestRatesError
+object LatestRatesApiError

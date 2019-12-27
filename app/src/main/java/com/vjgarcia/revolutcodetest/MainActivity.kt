@@ -2,7 +2,7 @@ package com.vjgarcia.revolutcodetest
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.vjgarcia.rates.RatesFragment
+import com.vjgarcia.rates.presentation.RatesFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         supportFragmentManager.beginTransaction().run {
-            add(R.id.fragmentHost, RatesFragment(), RatesFragment.FRAGMENT_TAG)
+            replace(R.id.fragmentHost, RatesFragment(), RatesFragment.FRAGMENT_TAG)
             commit()
         }
     }

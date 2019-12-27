@@ -1,4 +1,4 @@
-package com.vjgarcia.rates.data
+package com.vjgarcia.rates.data.network
 
 import okhttp3.HttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull

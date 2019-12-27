@@ -1,9 +1,12 @@
 package com.vjgarcia.rates.data
 
 import arrow.core.orNull
-import arrow.core.right
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.vjgarcia.rates.data.network.LatestRatesDTO
+import com.vjgarcia.rates.data.network.RatesApiClient
+import com.vjgarcia.rates.data.network.RevolutApiConfig
+import com.vjgarcia.rates.data.network.RevolutHttpUrlFactory
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertTrue
 import okhttp3.OkHttpClient
@@ -13,7 +16,7 @@ import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-class RevolutApiClientIT {
+class RatesApiClientIT {
 
     private val mockWebServer = MockWebServer()
 
@@ -21,7 +24,7 @@ class RevolutApiClientIT {
     private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
     private val revolutHttpUrlFactory = RevolutHttpUrlFactory()
 
-    private lateinit var sut: RevolutApiClient
+    private lateinit var sut: RatesApiClient
 
     @BeforeEach
     internal fun setUp() {
@@ -33,7 +36,7 @@ class RevolutApiClientIT {
             latestRatesPath = "latest"
         )
 
-        sut = RevolutApiClient(okHttpClient, moshi, revolutApiConfig, revolutHttpUrlFactory)
+        sut = RatesApiClient(okHttpClient, moshi, revolutApiConfig, revolutHttpUrlFactory)
     }
 
     @AfterEach
@@ -52,7 +55,7 @@ class RevolutApiClientIT {
     }
 
     private fun givenAValidLatestRatesResponse() {
-        val latestRatesResponse = getFileAsStringFromResources<RevolutApiClientIT>("LatestRatesValidResponse.json")
+        val latestRatesResponse = getFileAsStringFromResources<RatesApiClientIT>("LatestRatesValidResponse.json")
         mockWebServer.enqueue(
             MockResponse()
                 .setResponseCode(200)
