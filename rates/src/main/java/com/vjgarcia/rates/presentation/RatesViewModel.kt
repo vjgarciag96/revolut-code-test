@@ -4,30 +4,35 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import arrow.core.Either
-import com.vjgarcia.rates.domain.GetLatestRates
-import com.vjgarcia.rates.domain.LatestRatesError
+import com.vjgarcia.rates.domain.GetCurrencies
+import com.vjgarcia.rates.domain.UpdateBaseCurrency
+import com.vjgarcia.rates.domain.UpdateCurrentAmount
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
 internal class RatesViewModel(
-    private val getLatestRates: GetLatestRates
-) : ViewModel() {
+    private val getCurrencies: GetCurrencies,
+    private val updateBaseCurrency: UpdateBaseCurrency,
+    private val updateCurrentAmount: UpdateCurrentAmount
+) : ViewModel(), RatesEventsListener {
 
     private val subscriptions = CompositeDisposable()
 
-    private val mutableRatesState = MutableLiveData<RatesState>()
-    val ratesState: LiveData<RatesState> = mutableRatesState
+    private val mutableCurrenciesState = MutableLiveData<CurrenciesViewState>(CurrenciesViewState.Loading)
+    val currenciesState: LiveData<CurrenciesViewState> = mutableCurrenciesState
+
+    private val mutableCurrenciesEffect = MutableLiveData<CurrenciesEffect>()
+    val currenciesEffect: LiveData<CurrenciesEffect> = mutableCurrenciesEffect
 
     fun onRatesVisible() {
-        getLatestRates()
+        getCurrencies()
             .subscribeOn(Schedulers.computation())
-            .map { latestRatesResult ->
-                latestRatesResult.map { latestRates -> latestRates.toRatesState() }
-            }
+            .map { currenciesState -> currenciesState.toViewState() }
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(::onLatestRatesResult) { onLatestRatesError() }
+            .subscribe(::onCurrenciesViewState) {
+                onGetCurrenciesError()
+            }
             .let(subscriptions::add)
     }
 
@@ -35,19 +40,25 @@ internal class RatesViewModel(
         subscriptions.clear()
     }
 
-    private fun onLatestRatesResult(latestRatesResult: Either<LatestRatesError, RatesState>) {
-        latestRatesResult.fold(
-            ifLeft = { onLatestRatesError() },
-            ifRight = ::onLatestRatesSuccess
-        )
+    override fun onAmountChanged(amount: CharSequence) {
+        if (amount.isEmpty() || amount.isBlank()) {
+            updateCurrentAmount("0")
+            return
+        }
+        updateCurrentAmount(amount.toString())
     }
 
-    private fun onLatestRatesSuccess(ratesState: RatesState) {
-        mutableRatesState.value = ratesState
+    override fun onRowClicked(row: CurrencyRow) {
+        updateBaseCurrency(row.id)
+        mutableCurrenciesEffect.value = CurrenciesEffect.ScrollToTop
     }
 
-    private fun onLatestRatesError() {
-        Log.d(LOG_TAG, "error fetching latest rates")
+    private fun onCurrenciesViewState(currenciesViewState: CurrenciesViewState) {
+        mutableCurrenciesState.value = currenciesViewState
+    }
+
+    private fun onGetCurrenciesError() {
+        Log.d(LOG_TAG, "error fetching latest currencies")
     }
 
     private companion object {

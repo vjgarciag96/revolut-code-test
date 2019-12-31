@@ -6,19 +6,35 @@ import com.vjgarcia.rates.data.network.RatesApiClient
 import com.vjgarcia.rates.data.network.RevolutApiConfig
 import com.vjgarcia.rates.data.network.RevolutHttpUrlFactory
 import com.vjgarcia.rates.data.repository.RatesRepository
-import com.vjgarcia.rates.domain.GetLatestRates
+import com.vjgarcia.rates.domain.*
 import com.vjgarcia.rates.presentation.RatesViewModelFactory
 import okhttp3.OkHttpClient
 
 internal object ServiceLocator {
 
     val ratesViewModelFactory
-        get() = RatesViewModelFactory(getLatestRates)
+        get() = RatesViewModelFactory(
+            getLatestRates,
+            updateBaseCurrency,
+            updateCurrentAmount
+        )
 
     val getLatestRates
-        get() = GetLatestRates(ratesRepository)
+        get() = GetCurrencies(ratesBusinessLogic)
 
-    val ratesRepository by lazy { RatesRepository(ratesApiClient) }
+    val updateBaseCurrency
+        get() = UpdateBaseCurrency(ratesBusinessLogic)
+
+    val updateCurrentAmount
+        get() = UpdateCurrentAmount(ratesBusinessLogic)
+
+    val currenciesReducer
+        get() = CurrenciesReducer()
+
+    val ratesBusinessLogic by lazy { CurrenciesBusinessLogic(ratesRepository, currenciesReducer) }
+
+    val ratesRepository
+        get() = RatesRepository(ratesApiClient)
 
     val ratesApiClient
         get() = RatesApiClient(

@@ -5,7 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.vjgarcia.rates.R
 
-class RatesAdapter : ListAdapter<RateRow, RateRowViewHolder>(RateRowItemDiffCallback) {
+internal class RatesAdapter(
+    private val ratesEventsListener: RatesEventsListener
+) : ListAdapter<CurrencyRow, RateRowViewHolder>(RateRowItemDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RateRowViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -13,6 +15,6 @@ class RatesAdapter : ListAdapter<RateRow, RateRowViewHolder>(RateRowItemDiffCall
     }
 
     override fun onBindViewHolder(holder: RateRowViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), ratesEventsListener)
     }
 }

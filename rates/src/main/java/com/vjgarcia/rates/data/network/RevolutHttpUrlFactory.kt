@@ -17,6 +17,6 @@ internal class RevolutHttpUrlFactory {
     }
 
     private companion object {
-        const val BASE_QUERY_PARAM_NAME = "base"
+        const val BASE_QUERY_PARAM_NAME = "baseCurrency"
     }
 }
