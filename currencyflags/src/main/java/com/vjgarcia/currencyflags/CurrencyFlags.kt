@@ -2,8 +2,6 @@ package com.vjgarcia.currencyflags
 
 object CurrencyFlags {
 
-    fun init() {}
-
     val byISOCode: Map<String, Int> =
         mapOf(
             "AED" to R.drawable.aed,

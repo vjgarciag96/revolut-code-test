@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item>
+        <color android:color="@android:color/white" />
+    </item>
+    <item>
+        <bitmap android:gravity="center" android:src="@drawable/ic_revolut_logo" app:srcCompat="@drawable/ic_revolut_logo" />
+    </item>
+</layer-list>
