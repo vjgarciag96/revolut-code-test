@@ -2,7 +2,7 @@
 
 In this repo you'll see the project correspondent to Revolut's code test. The main requirements of the test are the next:
 
-* Show a list with the rates of the different currencies provided by the API (one per row)
+* Show a list with the rates of the different currencies provided by the given API (one per row)
 * Update these rates every second
 * Each row has an input where you can enter any amount of money
 * When you tap on currency row it should slide to top and its input becomes first responder
@@ -10,14 +10,14 @@ In this repo you'll see the project correspondent to Revolut's code test. The ma
 
 
 ## Architecture
-The idea of the implemented architecture was to follow clean architecture principles but not in a strict way in order to be pragmatics.
+The idea of the implemented architecture was to follow clean architecture principles but not in a strict way in order to be pragmatic.
 
 ### Presentation layer
 In presentation layer, MVVM pattern has been used to organize the code.
 
 It has been implemented with android jetpack's `ViewModel` and `LiveData` components to take advantage of its lifecycle's management.
 
-Other relevant point on this layer is the use of Android `ListAdapter` in order to perform lists' diffing in a background thread because the app is going to need updating them really frequently and doing this diffing calculation on main thread could have an impact on the app's performance.
+Other relevant point on this layer is the use of Android `ListAdapter` in order to perform lists' diff calculation in a background thread because the app is going to need updating them really frequently and doing this calculation on main thread could have an impact on the app's performance.
 
 The model consist of an LCE pattern to represent the possible states of the view and another sealed class to represent the possible effects or events needed to be dispatched to the view.
 
