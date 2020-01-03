@@ -37,4 +37,4 @@ In this layer we've used the repository pattern in order to hide the data origin
 We've decided to create a manual service locator because we've considered that the complexity of the project wasn't enough to start using DI frameworks like `Dagger` or other service locators like `Koin`.
 
 ### Testing
-Some unit tests have been added to the fundamental parts of the app like `CurrenciesBusinessLogic` and `CurrenciesReducer`. Also, an integration test has been added to the api client.
+Some unit tests have been added to the fundamental parts of the app like `CurrenciesBusinessLogic` and `CurrenciesReducer`. Also, an integration test has been added for the api client.
