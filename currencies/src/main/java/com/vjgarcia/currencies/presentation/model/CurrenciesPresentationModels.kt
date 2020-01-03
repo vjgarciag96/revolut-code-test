@@ -10,7 +10,7 @@ sealed class CurrenciesViewState {
 }
 
 sealed class CurrenciesEffect {
-    object ScrollToTop: CurrenciesEffect()
+    object RequestFocusOnBaseCurrency: CurrenciesEffect()
 }
 
 data class CurrencyRow(

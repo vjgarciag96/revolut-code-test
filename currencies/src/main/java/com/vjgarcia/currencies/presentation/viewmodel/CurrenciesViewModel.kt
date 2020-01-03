@@ -46,7 +46,7 @@ class CurrenciesViewModel(
 
     override fun onRowClicked(row: CurrencyRow) {
         updateBaseCurrency(row.id)
-        mutableCurrenciesEffect.value = CurrenciesEffect.ScrollToTop
+        mutableCurrenciesEffect.value = CurrenciesEffect.RequestFocusOnBaseCurrency
     }
 
     private fun onCurrenciesViewState(currenciesViewState: CurrenciesViewState) {

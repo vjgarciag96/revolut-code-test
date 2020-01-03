@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.TextView
 import androidx.core.view.doOnNextLayout
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -84,8 +86,12 @@ class CurrenciesFragment : Fragment() {
 
     private fun onCurrenciesEffect(currenciesEffect: CurrenciesEffect) {
         when (currenciesEffect) {
-            CurrenciesEffect.ScrollToTop -> currenciesView.doOnNextLayout {
+            CurrenciesEffect.RequestFocusOnBaseCurrency -> currenciesView.doOnNextLayout {
                 currenciesView.smoothScrollToPosition(0)
+                currenciesView.postDelayed(
+                    { currenciesView[0].findViewById<EditText>(R.id.currencyValueTextField).requestFocus() },
+                    300
+                )
             }
         }
     }
